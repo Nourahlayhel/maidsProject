@@ -9,6 +9,7 @@
   <app-user-card
     *ngFor="let user of users$ | async"
     [user]="user"
+    [searchKey]="searchKey$ | async"
     (clicked)="navigate(user.id)"
     [appSearch]="searchKey$ | async"
   ></app-user-card>

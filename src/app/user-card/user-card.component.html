@@ -11,7 +11,10 @@
   <div>
     <p>
       <span class="field-name">Id: </span>
-      <span [title]="user.id">{{ user.id }}</span>
+      <span
+        [title]="user.id"
+        [innerHtml]="user.id | highlighter : searchKey"
+      ></span>
     </p>
     <p>
       <span class="field-name">First Name: </span>

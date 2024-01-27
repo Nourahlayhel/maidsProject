@@ -12,6 +12,7 @@ import { User } from '../models/User';
 export class UserCardComponent {
   @Input() user: User | null = null;
   @Input() showDetails: boolean = false;
+  @Input() searchKey: string | null = '';
   @Output('clicked') clickEmitter = new EventEmitter();
 
   displayCard: boolean = true;

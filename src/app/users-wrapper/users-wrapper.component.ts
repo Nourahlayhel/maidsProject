@@ -30,10 +30,6 @@ export class UsersWrapperComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // this.store.pipe(select('user')).subscribe((userState) => {
-    //   this.loadUsers(1);
-    // });
-
     this.currentPage$.subscribe((res) => {
       this.currentPage = res;
     });
