@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
-import { loadAnimation } from '../animations/load-animation';
-import { loadUsers, search } from '../state/user.action';
+import { SearchState } from '../header/searchState/search.state';
+import { loadUsers } from '../state/user.action';
 import { UserState } from '../state/user.state';
 import { UsersService } from './users.service';
 
@@ -10,26 +10,40 @@ import { UsersService } from './users.service';
   selector: 'app-users-wrapper',
   templateUrl: './users-wrapper.component.html',
   styleUrls: ['./users-wrapper.component.scss'],
-  animations: [loadAnimation],
 })
 export class UsersWrapperComponent implements OnInit {
   searchBoxOpened: boolean = false;
   searchText: string = '';
   loadingData$ = this.store.pipe(select('user', 'loading'));
-  searchKey$ = this.store.pipe(select('user', 'searchkey'));
+  users$ = this.store.pipe(select('user', 'users'));
+  currentPage$ = this.store.pipe(select('user', 'currentPage'));
+  totalPages$ = this.store.pipe(select('user', 'totalPages'));
 
+  currentPage: number = 0;
+  totalPages: number = 0;
+  searchKey$ = this.searchStore.pipe(select('search', 'searchKey'));
   constructor(
     public usersService: UsersService,
     private router: Router,
-    private store: Store<{ user: UserState }>
+    private store: Store<{ user: UserState }>,
+    private searchStore: Store<{ search: SearchState }>
   ) {}
 
   ngOnInit() {
-    this.store.pipe(select('user')).subscribe((userState) => {
-      if (!userState.users.length) {
+    // this.store.pipe(select('user')).subscribe((userState) => {
+    //   this.loadUsers(1);
+    // });
+
+    this.currentPage$.subscribe((res) => {
+      this.currentPage = res;
+    });
+    this.totalPages$.subscribe((res) => {
+      this.totalPages = res;
+    });
+    this.users$.subscribe((users) => {
+      if (!users.length) {
         this.loadUsers(1);
       }
-      this.usersService.updateUserState(userState);
     });
   }
 
@@ -37,21 +51,13 @@ export class UsersWrapperComponent implements OnInit {
     this.store.dispatch(loadUsers({ page }));
   }
 
-  search(searchText: string) {
-    this.store.dispatch(search({ searchText }));
-  }
-
   paginate() {
-    let currentPageValue: number = this.usersService.currentPageSource.value;
-    let totalPagesValue = this.usersService.totalPagesSource.value;
-    if (currentPageValue < totalPagesValue) {
-      this.loadUsers(currentPageValue + 1);
+    if (this.currentPage < this.totalPages) {
+      this.loadUsers(this.currentPage + 1);
     }
   }
 
   navigate(userId: number) {
-    console.log(userId);
-
     this.usersService.getUserInfo(userId).subscribe(() => {
       this.router.navigateByUrl(`/${userId}`);
     });

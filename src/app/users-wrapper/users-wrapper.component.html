@@ -1,8 +1,4 @@
-<app-header
-  [searchText]="searchKey$ | async"
-  (onSearch)="search($event)"
-></app-header>
-
+<app-header></app-header>
 <div
   class="users-wrapper"
   infinite-scroll
@@ -10,8 +6,12 @@
   [infiniteScrollDistance]="2"
   (scrolled)="paginate()"
 >
-  <div [@load] *ngFor="let user of usersService.users$ | async">
-    <app-user-card [user]="user" (clicked)="navigate(user.id)"></app-user-card>
-  </div>
+  <app-user-card
+    *ngFor="let user of users$ | async"
+    [user]="user"
+    (clicked)="navigate(user.id)"
+    [appSearch]="searchKey$ | async"
+  ></app-user-card>
+
   <app-spinner *ngIf="loadingData$ | async"></app-spinner>
 </div>

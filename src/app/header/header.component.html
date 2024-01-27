@@ -1,45 +1,12 @@
-<div class="header">
-  <div class="search-menu-style" id="search-input">
-    <div
-      id="searchInputGroup search-wrapper"
-      class="searchbox"
-      [ngClass]="{
-        'input-focused': searchBoxOpened || searchText?.trim()?.length
-      }"
-    >
-      <button
-        *ngIf="!searchBoxOpened && !searchText?.trim()?.length"
-        class="themes-muted-button"
-        title="search"
-        (click)="openSearchBox()"
-      >
-        <span class="mask-search-icon"> </span>
-      </button>
-      <ng-container>
-        <input
-          #searchInput
-          autocomplete="off"
-          class="search-input"
-          [ngClass]="
-            searchBoxOpened || searchText?.trim()?.length
-              ? 'expand-input'
-              : 'collapse-input'
-          "
-          name="input"
-          type="text"
-          [value]="searchText"
-          placeholder="Type to search"
-          (keydown.enter)="$event.stopPropagation(); search($event)"
-          (keyup)="onSearchKeyChange($event)"
-        />
-        <button
-          *ngIf="searchBoxOpened || searchText?.trim()?.length"
-          class="close-button"
-          (click)="$event.stopPropagation(); closeSearchBox()"
-        >
-          <span class="close-icon themes-bg-text"></span>
-        </button>
-      </ng-container>
-    </div>
-  </div>
-</div>
+<header>
+  <img src="assets/images/logo.png" alt="logo" />
+  <input
+    *ngIf="showSearchBox"
+    #searchInputRef
+    type="text"
+    placeholder="Search here.."
+    [value]="searchKey$ | async"
+    (keyup)="onKeyUp()"
+    (keydown)="onKeyDown()"
+  />
+</header>

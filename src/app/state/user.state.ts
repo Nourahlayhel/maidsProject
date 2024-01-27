@@ -6,5 +6,4 @@ export interface UserState {
   currentPage: number;
   totalPages: number;
   loading: boolean;
-  searchkey: string;
 }

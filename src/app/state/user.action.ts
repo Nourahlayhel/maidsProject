@@ -23,7 +23,7 @@ export const setLoading = createAction(
   '[User] Set Loading',
   props<{ loading: boolean }>()
 );
-export const search = createAction(
-  '[User] search',
-  props<{ searchText: string }>()
-);
+// export const search = createAction(
+//   '[User] search',
+//   props<{ searchText: string }>()
+// );

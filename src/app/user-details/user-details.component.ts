@@ -17,7 +17,6 @@ export class UserDetailsComponent implements OnInit {
   ngOnInit(): void {
     if (!this.usersService.currentUserSource.value) {
       let currentUserId = this.route.snapshot.paramMap.get('id');
-      console.log(this.route.params);
       if (currentUserId)
         this.usersService.getUserInfo(+currentUserId).subscribe();
     }

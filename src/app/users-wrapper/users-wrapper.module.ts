@@ -7,6 +7,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SpinnerComponent } from '../spinner/spinner.component';
 import { FormsModule } from '@angular/forms';
 import { HeaderModule } from '../header/header.module';
+import { SearchDirective } from '../directives/search.directive';
 const routes: Routes = [
   {
     path: '',
@@ -19,6 +20,7 @@ const routes: Routes = [
   declarations: [UsersWrapperComponent],
   imports: [
     CommonModule,
+    SearchDirective,
     FormsModule,
     UserCardModule,
     InfiniteScrollModule,

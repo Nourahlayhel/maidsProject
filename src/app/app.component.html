@@ -1,1 +1,6 @@
 <router-outlet></router-outlet>
+<app-spinner
+  *ngIf="busyService.busy$ | async"
+  height="200px"
+  width="200px"
+></app-spinner>

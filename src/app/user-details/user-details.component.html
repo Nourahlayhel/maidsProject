@@ -1,12 +1,5 @@
-<button class="back-button" (click)="goBack()">back</button>
-<div *ngIf="usersService.currentUser$ | async as user">
-  <img [src]="user.avatar" />
-  <div>{{ user.id }}</div>
-  <div class="email">
-    <span> {{ user.first_name }} {{ user.last_name }} </span>
-  </div>
-  <div class="email">
-    <img src="assets/images/email-icon.svg" class="email-icon" />
-    <span> {{ user.email }} </span>
-  </div>
-</div>
+<app-header [showSearchBox]="false"></app-header>
+<button class="back-button" (click)="goBack()">&#11148; Back</button>
+<ng-container *ngIf="usersService.currentUser$ | async as user">
+  <app-user-card [user]="user" [showDetails]="true"></app-user-card>
+</ng-container>

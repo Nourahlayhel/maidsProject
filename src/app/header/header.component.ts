@@ -1,12 +1,7 @@
-import {
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  Output,
-  ViewChild,
-} from '@angular/core';
-import { fromEvent, map, distinctUntilChanged, debounceTime } from 'rxjs';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+import { search } from './searchState/search.action';
+import { SearchState } from './searchState/search.state';
 
 @Component({
   selector: 'app-header',
@@ -14,28 +9,26 @@ import { fromEvent, map, distinctUntilChanged, debounceTime } from 'rxjs';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  @Input() searchText: string | null = '';
-  @Output() onSearch = new EventEmitter();
+  @Input() showSearchBox: boolean = true;
+  @ViewChild('searchInputRef') searchInputRef!: ElementRef<HTMLInputElement>;
 
-  searchBoxOpened: boolean = false;
+  searchKey$ = this.store.pipe(select('search', 'searchKey'));
+  searchTimeout: any;
 
-  @ViewChild('searchInput') searchInputRef!: ElementRef<HTMLInputElement>;
-  constructor() {}
+  constructor(private store: Store<{ search: SearchState }>) {}
 
-  search(searchKey: any) {
-    this.onSearch.emit(searchKey);
+  onKeyUp() {
+    this.searchTimeout = setTimeout(() => {
+      this.emitSearchKey();
+    }, 300);
   }
-  onSearchKeyChange(key: any) {}
-  openSearchBox() {
-    fromEvent(this.searchInputRef.nativeElement, 'input')
-      .pipe(
-        map((event: Event) => (<HTMLInputElement>event.target).value),
-        debounceTime(600),
-        distinctUntilChanged()
-      )
-      .subscribe((value) => {
-        this.search(value);
-      });
+
+  emitSearchKey() {
+    let searchKey = this.searchInputRef.nativeElement.value;
+    this.store.dispatch(search({ searchKey }));
   }
-  closeSearchBox() {}
+
+  onKeyDown() {
+    this.searchTimeout = null;
+  }
 }

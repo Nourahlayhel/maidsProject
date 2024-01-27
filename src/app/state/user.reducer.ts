@@ -10,7 +10,6 @@ export const initialState: UserState = {
   currentPage: 0,
   totalPages: 0,
   loading: false,
-  searchkey: '',
 };
 
 export const userReducer = createReducer(
@@ -29,8 +28,7 @@ export const userReducer = createReducer(
   on(UserActions.loadUsersFailure, (state, { error }) => ({
     ...state,
     loading: false,
-  })),
-  on(UserActions.search, (state, { searchText }) => ({ ...state, searchText }))
+  }))
 );
 
 export function reducer(state: UserState | undefined, action: Action) {

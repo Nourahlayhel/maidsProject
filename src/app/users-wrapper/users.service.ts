@@ -16,33 +16,12 @@ export class UsersService {
     private httpClient: HttpClient,
     private store: Store<UserState>
   ) {}
-  usersSource = new BehaviorSubject<User[]>([]);
-  currentPageSource = new BehaviorSubject<number>(0);
-  totalPagesSource = new BehaviorSubject<number>(0);
-
-  users$ = this.usersSource.asObservable();
-  currentPage$ = this.currentPageSource.asObservable();
-  totalPages$ = this.totalPagesSource.asObservable();
 
   currentUserSource = new BehaviorSubject<User | null>(null);
   currentUser$: Observable<any> = this.currentUserSource.asObservable();
 
   totalPages: number = 0;
   currentPage: number = 1;
-
-  get users(): User[] {
-    return this.usersSource.value;
-  }
-
-  set users(usersData: User[]) {
-    this.usersSource.next(usersData);
-  }
-
-  updateUserState(userState: UserState) {
-    this.usersSource.next(userState.users);
-    this.currentPageSource.next(userState.currentPage);
-    this.totalPagesSource.next(userState.totalPages);
-  }
 
   getUsersPaginated(pageNumber: number) {
     const params = new HttpParams().set('page', pageNumber.toString());

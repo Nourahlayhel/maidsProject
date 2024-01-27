@@ -1,14 +1,36 @@
-<div *ngIf="user" class="user-card">
-  <div
+<div [@load] *ngIf="user && displayCard" class="card">
+  <img
     [@hoverGrow]="state"
     class="avatar"
     (mouseenter)="onMouseEnter()"
     (mouseleave)="onMouseLeave()"
-    (click)="emitClick()"
-  >
-    <img [src]="user.avatar" alt="" />
-  </div>
-  <div class="name">
-    {{ user.id }}.{{ user.first_name }} {{ user.last_name }}
+    (click)="!showDetails && emitClick()"
+    [src]="user.avatar"
+    alt=""
+  />
+  <div>
+    <p>
+      <span class="field-name">Id: </span>
+      <span [title]="user.id">{{ user.id }}</span>
+    </p>
+    <p>
+      <span class="field-name">First Name: </span>
+      <span [title]="user.first_name">{{ user.first_name }}</span>
+    </p>
+    <p>
+      <span class="field-name">Last Name: </span>
+      <span [title]="user.last_name">
+        {{ user.last_name }}
+      </span>
+    </p>
+    <ng-container *ngIf="showDetails; else previewButtonTemplate">
+      <p>
+        <span class="field-name">Email: </span>
+        <span [title]="user.email">{{ user.email }}</span>
+      </p>
+    </ng-container>
+    <ng-template #previewButtonTemplate>
+      <button class="preview-button" (click)="emitClick()">View Details</button>
+    </ng-template>
   </div>
 </div>
