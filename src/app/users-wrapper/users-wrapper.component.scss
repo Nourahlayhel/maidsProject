@@ -1,0 +1,12 @@
+.users-wrapper {
+  gap: 12px;
+  display: grid;
+  background-color: #f6f7fb;
+  justify-content: center;
+  align-items: center;
+  display: grid;
+  max-height: 88vh;
+  min-height: 80vh;
+  overflow: auto;
+  overflow-x: hidden;
+}

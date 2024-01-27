@@ -1,0 +1,14 @@
+<div *ngIf="user" class="user-card">
+  <div
+    [@hoverGrow]="state"
+    class="avatar"
+    (mouseenter)="onMouseEnter()"
+    (mouseleave)="onMouseLeave()"
+    (click)="emitClick()"
+  >
+    <img [src]="user.avatar" alt="" />
+  </div>
+  <div class="name">
+    {{ user.id }}.{{ user.first_name }} {{ user.last_name }}
+  </div>
+</div>

@@ -1,0 +1,68 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.search-wrapper {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.searchbox {
+  display: flex;
+  align-items: center;
+  border-radius: 20px;
+  border: 2px solid transparent;
+  padding: 0px;
+  font-family: "font-light", "font-light-arabic", sans-serif;
+  gap: 5px;
+
+  input {
+    border: none;
+    outline: none;
+    transition: all 0.3s ease;
+    font-size: 16px;
+    height: 40px;
+    background-color: transparent;
+
+    &::placeholder {
+      opacity: 0.5;
+    }
+  }
+}
+
+.input-focused {
+  border: 2px solid #7e84a3 !important;
+  padding-inline-start: 15px;
+  padding-inline-end: 10px;
+  margin-inline-end: -10px;
+}
+
+.collapse-input {
+  width: 0 !important;
+}
+
+.expand-input {
+  width: 400px;
+}
+
+.close-button {
+  background-color: transparent;
+  border: 0;
+  padding: 7px;
+}
+
+.close-icon {
+  cursor: pointer;
+  mask: url("/assets/images/icons/DeleteIconX.svg");
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+}
+.search-menu-style {
+  position: relative;
+}
