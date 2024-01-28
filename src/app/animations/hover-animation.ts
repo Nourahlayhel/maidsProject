@@ -1,4 +1,3 @@
-// In your animations.ts file
 import {
   trigger,
   style,

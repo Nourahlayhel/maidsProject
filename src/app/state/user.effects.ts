@@ -1,14 +1,11 @@
-// user.effects.ts
-
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
 import { EMPTY } from 'rxjs';
-import { mergeMap, map, catchError, withLatestFrom, tap } from 'rxjs/operators';
-import * as UserActions from './user.action';
-import { Action, Store } from '@ngrx/store';
+import { catchError, map, mergeMap, tap } from 'rxjs/operators';
 import { UsersService } from '../users-wrapper/users.service';
+import * as UserActions from './user.action';
 import { UserState } from './user.state';
-import { User } from '../models/User';
 
 @Injectable()
 export class UserEffects {

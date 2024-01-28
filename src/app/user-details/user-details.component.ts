@@ -4,7 +4,6 @@ import { select, Store } from '@ngrx/store';
 import { User } from '../models/User';
 import { selectUser } from '../state/user.action';
 import { UserState } from '../state/user.state';
-import { UsersService } from '../users-wrapper/users.service';
 
 @Component({
   selector: 'app-user-details',
@@ -33,6 +32,7 @@ export class UserDetailsComponent implements OnInit {
       }
     }
   }
+
   goBack() {
     this.router.navigateByUrl('/');
   }
