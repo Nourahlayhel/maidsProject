@@ -2,7 +2,7 @@ import { User } from '../models/User';
 
 export interface UserState {
   users: User[];
-  selectedUserId: string | null;
+  selectedUser: User | null;
   currentPage: number;
   totalPages: number;
   loading: boolean;

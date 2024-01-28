@@ -1,6 +1,4 @@
 <router-outlet></router-outlet>
-<app-spinner
-  *ngIf="busyService.busy$ | async"
-  height="200px"
-  width="200px"
-></app-spinner>
+<h3 *ngIf="errorReporterService.error$ | async">
+  An error occured while retrieving data
+</h3>

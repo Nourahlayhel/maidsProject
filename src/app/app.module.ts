@@ -7,9 +7,8 @@ import { StoreModule } from '@ngrx/store';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderModule } from './header/header.module';
 import { searchReducer } from './header/searchState/search.reducer';
-import { BusyInterceptor } from './interceptors/busy.interceptor';
+import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { UserEffects } from './state/user.effects';
 import { userReducer } from './state/user.reducer';
@@ -29,7 +28,7 @@ import { UsersWrapperModule } from './users-wrapper/users-wrapper.module';
     EffectsModule.forRoot([UserEffects]),
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: BusyInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

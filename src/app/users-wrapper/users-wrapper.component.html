@@ -1,5 +1,6 @@
 <app-header></app-header>
 <div
+  *ngIf="(users$ | async)?.length"
   class="users-wrapper"
   infinite-scroll
   [scrollWindow]="false"
@@ -13,6 +14,5 @@
     (clicked)="navigate(user.id)"
     [appSearch]="searchKey$ | async"
   ></app-user-card>
-
-  <app-spinner *ngIf="loadingData$ | async"></app-spinner>
 </div>
+<app-spinner *ngIf="loadingData$ | async"></app-spinner>

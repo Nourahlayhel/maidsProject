@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BusyService } from './services/busy.service';
+import { ErrorReporterService } from './services/error-reporter.service';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +7,6 @@ import { BusyService } from './services/busy.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  constructor(public busyService: BusyService) {}
+  constructor(public errorReporterService: ErrorReporterService) {}
   title = 'MaidsApp';
 }

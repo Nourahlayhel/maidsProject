@@ -5,7 +5,7 @@
   align-self: center;
   gap: 20px;
   height: auto;
-  width: 400px;
+  width: 470px;
   max-width: 100vw;
   margin-bottom: 12px;
   padding: 10px 15px;
@@ -14,7 +14,7 @@
   border-radius: 4px;
 
   p {
-    width: 200px;
+    width: 270px;
     overflow-x: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -38,4 +38,8 @@
   color: #fff;
   background-color: #4068b1;
   border-radius: 4px;
+  opacity: 0.9;
+  &:hover {
+    opacity: 1;
+  }
 }

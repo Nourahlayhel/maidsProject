@@ -1,24 +1,14 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { BehaviorSubject, Observable, take, tap } from 'rxjs';
+import { take } from 'rxjs';
 import { environment } from 'src/enviroment/enviroment';
-import { User } from '../models/User';
-import { loadUsers, loadUsersSuccess } from '../state/user.action';
-import { UserState } from '../state/user.state';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UsersService {
   private readonly baseUrl = environment.usersUrl;
-  constructor(
-    private httpClient: HttpClient,
-    private store: Store<UserState>
-  ) {}
-
-  currentUserSource = new BehaviorSubject<User | null>(null);
-  currentUser$: Observable<any> = this.currentUserSource.asObservable();
+  constructor(private httpClient: HttpClient) {}
 
   totalPages: number = 0;
   currentPage: number = 1;
@@ -29,12 +19,6 @@ export class UsersService {
   }
 
   getUserInfo(userId: number) {
-    return this.httpClient.get(this.baseUrl + `/${userId}`).pipe(
-      take(1),
-      tap((userData: any) => {
-        let { data } = userData;
-        this.currentUserSource.next(data);
-      })
-    );
+    return this.httpClient.get(this.baseUrl + `/${userId}`).pipe(take(1));
   }
 }

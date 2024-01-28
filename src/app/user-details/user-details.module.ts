@@ -4,6 +4,7 @@ import { UserDetailsComponent } from './user-details.component';
 import { RouterModule, Routes } from '@angular/router';
 import { UserCardModule } from '../user-card/user-card.module';
 import { HeaderModule } from '../header/header.module';
+import { SpinnerComponent } from '../spinner/spinner.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,7 @@ const routes: Routes = [
     CommonModule,
     UserCardModule,
     HeaderModule,
+    SpinnerComponent,
     RouterModule.forChild(routes),
   ],
   exports: [UserDetailsComponent],

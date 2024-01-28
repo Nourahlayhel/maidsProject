@@ -8,6 +8,7 @@ import * as UserActions from './user.action';
 import { Action, Store } from '@ngrx/store';
 import { UsersService } from '../users-wrapper/users.service';
 import { UserState } from './user.state';
+import { User } from '../models/User';
 
 @Injectable()
 export class UserEffects {
@@ -36,6 +37,23 @@ export class UserEffects {
     )
   );
 
+  selectUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UserActions.selectUser),
+      tap(() => {
+        this.store.dispatch(UserActions.loadUser({ selectedUser: null }));
+        this.store.dispatch(UserActions.setLoading({ loading: true }));
+      }),
+      mergeMap(({ userId }) =>
+        this.userService.getUserInfo(userId).pipe(
+          map(({ data }: any) => UserActions.loadUser({ selectedUser: data })),
+          tap(() =>
+            this.store.dispatch(UserActions.setLoading({ loading: false }))
+          )
+        )
+      )
+    )
+  );
   constructor(
     private actions$: Actions,
     private userService: UsersService,

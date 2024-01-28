@@ -14,14 +14,15 @@ import { UsersService } from './users.service';
 export class UsersWrapperComponent implements OnInit {
   searchBoxOpened: boolean = false;
   searchText: string = '';
+  currentPage: number = 0;
+  totalPages: number = 0;
+
   loadingData$ = this.store.pipe(select('user', 'loading'));
   users$ = this.store.pipe(select('user', 'users'));
   currentPage$ = this.store.pipe(select('user', 'currentPage'));
   totalPages$ = this.store.pipe(select('user', 'totalPages'));
-
-  currentPage: number = 0;
-  totalPages: number = 0;
   searchKey$ = this.searchStore.pipe(select('search', 'searchKey'));
+
   constructor(
     public usersService: UsersService,
     private router: Router,
@@ -33,9 +34,11 @@ export class UsersWrapperComponent implements OnInit {
     this.currentPage$.subscribe((res) => {
       this.currentPage = res;
     });
+
     this.totalPages$.subscribe((res) => {
       this.totalPages = res;
     });
+
     this.users$.subscribe((users) => {
       if (!users.length) {
         this.loadUsers(1);
@@ -54,8 +57,6 @@ export class UsersWrapperComponent implements OnInit {
   }
 
   navigate(userId: number) {
-    this.usersService.getUserInfo(userId).subscribe(() => {
-      this.router.navigateByUrl(`/${userId}`);
-    });
+    this.router.navigateByUrl(`/${userId}`);
   }
 }

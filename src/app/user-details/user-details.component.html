@@ -1,5 +1,6 @@
 <app-header [showSearchBox]="false"></app-header>
 <button class="back-button" (click)="goBack()">&#11148; Back</button>
-<ng-container *ngIf="usersService.currentUser$ | async as user">
+<ng-container *ngIf="user$ | async as user">
   <app-user-card [user]="user" [showDetails]="true"></app-user-card>
 </ng-container>
+<app-spinner *ngIf="loading$ | async"></app-spinner>

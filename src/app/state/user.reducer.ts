@@ -6,7 +6,7 @@ import { UserState } from './user.state';
 
 export const initialState: UserState = {
   users: [],
-  selectedUserId: null,
+  selectedUser: null,
   currentPage: 0,
   totalPages: 0,
   loading: false,
@@ -28,6 +28,12 @@ export const userReducer = createReducer(
   on(UserActions.loadUsersFailure, (state, { error }) => ({
     ...state,
     loading: false,
+  })),
+  on(UserActions.selectUser, (state) => ({ ...state, loading: true })),
+  on(UserActions.loadUser, (state, { selectedUser }) => ({
+    ...state,
+    selectedUser,
+    loading: !selectedUser,
   }))
 );
 

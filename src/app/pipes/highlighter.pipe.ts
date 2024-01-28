@@ -11,7 +11,6 @@ export class HighlighterPipe implements PipeTransform {
     let newValue = value
       .toString()
       .replace(re, '<span class="highlighted">$&</span>');
-
     return newValue;
   }
 }
